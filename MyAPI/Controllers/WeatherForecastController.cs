@@ -15,20 +15,30 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+
+    private readonly ILoggerManager _myLogger;
+
     private readonly IUSerRepository _userRepo;
 
     public WeatherForecastController(
+        ILoggerManager myLogger,
         ILogger<WeatherForecastController> logger,
-         IUSerRepository userRepo)
+        IUSerRepository userRepo)
     {
+        _myLogger = myLogger;
         _logger = logger;
         _userRepo = userRepo;
     }
 
     [HttpGet ]
-    public IActionResult DoSomething(string lol)
+    public IActionResult DoSomething(string? lol = null)
     {
-        return Ok("anything " + lol);
+        _myLogger.LogInfo("Here is info message from our values controller.");
+        _myLogger.LogDebug("Here is debug message from our values controller.");
+        _myLogger.LogWarn("Here is warn message from our values controller.");
+        _myLogger.LogError("Here is an error message from our values controller.");
+
+        return Ok(new string[] { "value1", "value2", lol });
     }
 
     // [HttpGet(Name = "GetWeatherForecast")]
