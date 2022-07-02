@@ -1,5 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -8,6 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // custom services
+builder.Services.ConfigureCors("corsPolicy");
 builder.Services.ConfigureUserRepository();
 
 var app = builder.Build();
@@ -17,6 +19,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseHsts(); // strictly transport security
 }
 
 // app.UseExceptionHandler();
@@ -24,7 +31,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("CorsPolicy");
+
 app.UseAuthorization();
+
+app.Run(async context => 
+{
+    await context.Response.WriteAsync("Hello from the middleware.");
+});
 
 app.MapControllers();
 

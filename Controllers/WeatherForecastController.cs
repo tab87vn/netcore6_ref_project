@@ -22,7 +22,7 @@ public class WeatherForecastController : ControllerBase
         _userRepo = userRepo;
     }
 
-    [HttpGet]
+    [HttpGet ]
     public IActionResult DoSomething(string lol)
     {
         return Ok("anything " + lol);
