@@ -1,3 +1,7 @@
+namespace tab.TestDotNet.MainApp.Extensions;
+
+using tab.TestDotNet.Services.Contracts;
+using tab.TestDotNet.Services.LoggerServices;
 
 public static class ServiceExtensions
 {
@@ -20,4 +24,7 @@ public static class ServiceExtensions
             });
         });
     }
+
+    public static void ConfigureLoggerService(this IServiceCollection services) =>
+        services.AddSingleton<ILoggerManager, LoggerManager>();
 }

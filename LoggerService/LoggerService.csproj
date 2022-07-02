@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.*" />
+    <!-- <PackageReference Include="NLog" Version="5.*" /> -->
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.*" />
-    <!-- <PackageReference Include="NLog" Version="5.*" /> -->
+    <ProjectReference Include="..\Contracts\Contracts.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

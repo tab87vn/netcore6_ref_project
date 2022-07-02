@@ -1,4 +1,5 @@
 using NLog;
+using tab.TestDotNet.MainApp.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddSwaggerGen();
 
 // custom services
 builder.Services.ConfigureCors("corsPolicy");
+builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureUserRepository();
 
 var app = builder.Build();
