@@ -1,5 +1,7 @@
-namespace tab.TestDotNet.MainApp.Extensions;
+namespace tab.TestDotNet.API.Extensions;
 
+using Microsoft.Extensions.DependencyInjection;
+using tab.TestDotNet.API.Repositories;
 using tab.TestDotNet.Services.Contracts;
 using tab.TestDotNet.Services.LoggerServices;
 

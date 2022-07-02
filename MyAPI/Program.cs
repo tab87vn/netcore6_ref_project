@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 using NLog;
-using tab.TestDotNet.MainApp.Extensions;
+using tab.TestDotNet.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,11 +45,6 @@ app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
-
-app.Run(async context => 
-{
-    await context.Response.WriteAsync("Hello from the middleware.");
-});
 
 app.MapControllers();
 

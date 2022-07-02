@@ -1,4 +1,4 @@
-namespace todoapi_netcore6;
+namespace tab.TestDotNet.API.Models;
 
 public class WeatherForecast
 {
