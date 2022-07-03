@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 using NLog;
 using tab.TestDotNet.API.Extensions;
+using tab.TestDotNet.Services.Contracts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,12 +22,15 @@ builder.Services.ConfigureUserRepository();
 
 var app = builder.Build();
 
+var logger = app.Services.GetRequiredService<ILoggerManager>();
+app.ConfigureExceptionHandler(logger);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
+    // app.UseDeveloperExceptionPage();
 }
 else
 {

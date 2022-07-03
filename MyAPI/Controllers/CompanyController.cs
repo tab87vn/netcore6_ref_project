@@ -49,4 +49,10 @@ public class CompaniesController : ControllerBase
         Console.Out.WriteLine("eh: " + id.ToString());
         return ALL_EMPS.Where(x => x.CompanyId == id);
     }
+
+    [HttpGet("exceptions")]
+    public IActionResult TestException()
+    {
+        throw new Exception("Something really bad happen.");
+    }
 }
