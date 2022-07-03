@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using tab.TestDotNet.API.Exceptions;
 using tab.TestDotNet.API.Models;
 
 namespace tab.TestDotNet.API.Controllers;
@@ -36,10 +37,18 @@ public class CompaniesController : ControllerBase
     }
 
     // /api/companies/{id}
-    [HttpGet("{id}")]
-    public Company GetOneCompany(Guid id)
+    [HttpGet("{id:guid}", Name = "Get Company")]
+    public Company GetOneCompany(string? something, Guid id)
     {
-        return ALL_COMPS.FirstOrDefault(x => x.Id == id);
+        var company = ALL_COMPS.FirstOrDefault(x => x.Id == id);
+        if (company == null)
+        {
+            throw new CompanyNotFoundException("Uh oh, not found for this id");
+        }
+
+        Console.Out.WriteAsync("I don't care.");
+
+        return company;
     }
 
     // /api/companies/{id}/employees
@@ -54,5 +63,11 @@ public class CompaniesController : ControllerBase
     public IActionResult TestException()
     {
         throw new Exception("Something really bad happen.");
+    }
+
+    [HttpGet("notfoundexceptions")]
+    public IActionResult Test404Exception()
+    {
+        throw new CompanyNotFoundException("Uh oh, company not found.");
     }
 }
